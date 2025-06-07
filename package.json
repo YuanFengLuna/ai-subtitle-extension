@@ -1,0 +1,27 @@
+{
+  "name": "ai-subtitle-extension",
+  "version": "1.0.0",
+  "description": "A Chrome extension that automatically adds AI-translated subtitles as an overlay on video content. This extension enhances the viewing experience by providing real-time translation of video content in the user's preferred language.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "chrome-extension",
+    "subtitle",
+    "translation",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.260",
+    "@types/node": "^20.11.24",
+    "sharp": "^0.34.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4"
+  }
+}

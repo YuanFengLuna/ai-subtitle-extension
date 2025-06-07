@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Subtitle Translation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Subtitle Translation</h1>
+        <div class="settings">
+            <div class="setting-group">
+                <label for="targetLanguage">Target Language:</label>
+                <select id="targetLanguage">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="ja">Japanese</option>
+                    <option value="zh">Chinese</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="fontSize">Font Size:</label>
+                <input type="range" id="fontSize" min="12" max="32" value="16">
+            </div>
+            <div class="setting-group">
+                <label for="fontColor">Font Color:</label>
+                <input type="color" id="fontColor" value="#ffffff">
+            </div>
+        </div>
+        <div class="status">
+            <span id="statusText">Extension is active</span>
+        </div>
+    </div>
+    <script type="module" src="./index.ts"></script>
+</body>
+</html> 
