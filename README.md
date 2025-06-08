@@ -4,12 +4,12 @@ A Chrome extension that automatically adds AI-translated subtitles as an overlay
 
 ## Features
 
-- Automatic subtitle detection and extraction from video content (in progress)
-- Real-time AI-powered translation (planned)
+- Automatic subtitle detection and extraction from YouTube video captions
+- Real-time AI-powered translation using DeepL API
 - Customizable subtitle appearance (font, size, color, position)
-- Support for multiple languages
+- Support for multiple languages (DeepL supported)
 - Non-intrusive overlay that doesn't interfere with video playback
-- Works on major video platforms (YouTube, Netflix, etc.)
+- Works on major video platforms (YouTube supported; others planned)
 
 ## Current Progress
 
@@ -18,20 +18,22 @@ A Chrome extension that automatically adds AI-translated subtitles as an overlay
 - ✅ Popup UI for language, font size, and color selection implemented
 - ✅ Settings are stored and loaded using Chrome storage
 - ✅ Overlay infrastructure is in place: overlay is attached to the document body and ready to display subtitles
-- ✅ All debug/test code has been cleaned up
-- ⬜️ Subtitle extraction from video (YouTube) **not yet implemented**
-- ⬜️ AI translation integration **not yet implemented**
-- ⬜️ Real-time subtitle display and updates **not yet implemented**
+- ✅ Subtitle extraction from YouTube's built-in captions implemented
+- ✅ DeepL translation integration implemented
+- ✅ Real-time subtitle display and updates implemented
+- ⬜️ Subtitle extraction from other platforms (Netflix, etc.)
+- ⬜️ AI speech-to-text fallback (planned)
+- ⬜️ Batch translation, caching, and latency improvements (planned)
 
 ## Next Steps
 
-1. **Subtitle Extraction**
-   - Implement logic to extract subtitles (closed captions) from YouTube videos (or other platforms)
-2. **AI Translation Integration**
-   - Integrate with an AI translation API (e.g., OpenAI, Google Translate)
-   - Send extracted subtitles for translation and display the result in the overlay
-3. **Dynamic Overlay Updates**
-   - Update the overlay in real time as the video plays and new subtitles appear
+1. **Platform Support**
+   - Add subtitle extraction for other platforms (Netflix, etc.)
+2. **Performance Improvements**
+   - Implement batching and caching to reduce latency and API usage
+   - Optionally fetch and translate full subtitle transcripts in advance
+3. **Speech-to-Text Fallback**
+   - Use AI speech-to-text if no subtitles are available
 4. **Testing and Refinement**
    - Test on multiple platforms and video sites
    - Refine overlay positioning and appearance as needed
@@ -47,18 +49,17 @@ A Chrome extension that automatically adds AI-translated subtitles as an overlay
 ### 2. Core Components
 - [x] Content Script
   - [x] Overlay management
-  - [ ] Subtitle extraction (next)
+  - [x] Subtitle extraction (YouTube)
 - [x] Background Script
-  - [x] API communication (scaffolded)
-  - [ ] Translation service integration (next)
+  - [x] DeepL translation service integration
 - [x] Popup UI
   - [x] Language selection
   - [x] Settings management
   - [x] Extension status
 
 ### 3. AI Integration
-- [ ] Set up translation API service
-- [ ] Implement translation request handling
+- [x] Set up DeepL translation API service
+- [x] Implement translation request handling
 - [ ] Add caching mechanism for performance
 - [ ] Error handling and fallback options
 
@@ -71,7 +72,7 @@ A Chrome extension that automatically adds AI-translated subtitles as an overlay
 ### 5. Testing & Optimization
 - [ ] Unit tests
 - [ ] Integration tests
-- [ ] Performance optimization
+- [ ] Performance optimization (batching, caching)
 - [ ] Cross-platform testing
 
 ### 6. Deployment
@@ -79,32 +80,50 @@ A Chrome extension that automatically adds AI-translated subtitles as an overlay
 - [ ] Documentation
 - [ ] Release management
 
-## Project Structure
-```
-ai-subtitle-extension/
-├── src/
-│   ├── content/         # Content scripts (overlay logic here)
-│   ├── background/      # Background scripts
-│   ├── popup/           # Extension popup UI
-│   ├── services/        # API and translation services
-│   └── utils/           # Utility functions
-├── public/              # Static assets (icons)
-├── dist/                # Build output
-├── tests/               # Test files
-└── manifest.json        # Extension manifest
-```
+## Environment Setup
 
-## Development Setup
+1. **Create a `.env` file in your project root:**
+   ```
+   VITE_DEEPL_API_KEY=your_deepl_api_key_here
+   ```
+   - Get your DeepL API key from https://www.deepl.com/pro-api
+   - **Do not commit your `.env` file to version control!**
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Build the extension: `npm run build`
-5. Load the extension in Chrome:
+2. **Install dependencies:**
+   ```
+   npm install
+   ```
+
+3. **Start development server:**
+   ```
+   npm run dev
+   ```
+
+4. **Build the extension:**
+   ```
+   npm run build
+   ```
+
+5. **Load the extension in Chrome:**
    - Go to `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked"
    - Select the `dist` directory
+
+## Usage Notes
+
+- **You must enable subtitles (CC) on YouTube videos** for the extension to detect and translate them.
+- The overlay will show the translated subtitle above the video controls.
+- Subtitle lines may be short due to YouTube's segment structure.
+- There may be a slight delay due to translation API calls.
+
+## Limitations & Future Improvements
+
+- Only works with YouTube's built-in subtitles for now
+- Subtitle lines may be short and split awkwardly
+- Some latency due to real-time translation
+- No caching or batching yet (planned)
+- No speech-to-text fallback yet (planned)
 
 ## Contributing
 
